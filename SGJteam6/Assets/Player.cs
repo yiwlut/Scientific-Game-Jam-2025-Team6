@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         input = new InputSystem_Actions();
-        input.Player.Click.performed += _ => OnClick();
+        input.Player.Hammer.performed += _ => HammerAttack();
+        input.Player.Net.performed += _ => NetAttack();
     }
 
     void OnEnable()
@@ -56,7 +57,25 @@ public class PlayerController : MonoBehaviour
     }
 
     // --- クリックされたときに重なっているものを利用 ---
-    void OnClick()
+    void HammerAttack()
+    {
+        // null のオブジェクトをリストから削除
+        overlapping.RemoveAll(obj => obj == null);
+
+        // コピーしてループ
+        foreach (var obj in new List<GameObject>(overlapping))
+        {
+            if (obj.CompareTag("Concrete"))
+            {
+                GetConcrete();
+                overlapping.Remove(obj); // リストから削除
+                Destroy(obj);            // シーンから消す
+            }
+        }
+    }
+
+
+    void NetAttack()
     {
         // null のオブジェクトをリストから削除
         overlapping.RemoveAll(obj => obj == null);
@@ -69,12 +88,6 @@ public class PlayerController : MonoBehaviour
                 GetCO2();
                 overlapping.Remove(obj); // リストから削除
                 Destroy(obj);            // シーンから消す
-            }
-            else if (obj.CompareTag("Concrete"))
-            {
-                GetConcrete();
-                overlapping.Remove(obj);
-                Destroy(obj);
             }
         }
     }
