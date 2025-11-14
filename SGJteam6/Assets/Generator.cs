@@ -3,8 +3,8 @@ using UnityEngine;
 public class Generator : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;  // Inspector‚ÅPrefab‚ğƒZƒbƒg
-    [SerializeField] private Vector2 xRange = new Vector2(-5f, 5f); // X”ÍˆÍ
-    [SerializeField] private Vector2 yRange = new Vector2(-5f, 5f); // Y”ÍˆÍ
+    [SerializeField] private Vector2 xRange = new Vector2(-8.5f, 8.5f); // X”ÍˆÍ
+    [SerializeField] private Vector2 yRange = new Vector2(-3.5f, 3.5f); // Y”ÍˆÍ
 
     [SerializeField] private float spawnInterval = 10f; // •½‹Ï¶¬ŠÔŠu
     private float timer = 0f;
